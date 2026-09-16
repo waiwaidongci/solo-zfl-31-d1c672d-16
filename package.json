@@ -1,0 +1,15 @@
+{
+  "name": "brocade-loom-studio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "手工织锦纹样排版台 + 上机织造仿真(穿综编排 / 开口序列 / 联查 / 回放)",
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "test": "node --test tests/engine.test.js",
+    "test:e2e": "playwright test",
+    "record": "npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

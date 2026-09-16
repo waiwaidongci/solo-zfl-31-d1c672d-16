@@ -1,0 +1,97 @@
+/* 手工织锦纹样排版台 · 上机织造 —— 全站样式 */
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; font-family: Arial, "PingFang SC", sans-serif; background: #f3efe7; color: #282018; }
+header { padding: 14px 24px; background: #fffaf2; border-bottom: 1px solid #d9cdbc; display: flex; justify-content: space-between; gap: 16px; align-items: center; flex-wrap: wrap; }
+h1 { margin: 0; font-size: 24px; }
+h2 { font-size: 16px; margin: 18px 0 8px; }
+h3 { font-size: 14px; margin: 16px 0 6px; }
+button { border: 0; border-radius: 8px; padding: 10px 13px; background: #8d3e37; color: #fff; font-weight: 800; cursor: pointer; }
+button.secondary { background: #71675c; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+input, select { width: 100%; border: 1px solid #d9cdbc; border-radius: 6px; padding: 9px; font: inherit; background: #fff; }
+label { display: block; margin: 9px 0 5px; color: #76695e; font-size: 13px; }
+.hint { color: #8a7d6f; font-size: 12px; font-weight: 400; }
+
+.tabs { display: flex; gap: 8px; }
+.tab { background: #71675c; padding: 12px 22px; font-size: 16px; }
+.tab.active { background: #8d3e37; outline: 3px solid #e5c9a8; }
+
+.app { display: grid; grid-template-columns: 280px 1fr 320px; gap: 16px; padding: 16px; }
+.app.loom { grid-template-columns: 300px minmax(0, 1fr) 340px; align-items: start; }
+.panel { background: #fffaf2; border: 1px solid #d9cdbc; border-radius: 8px; padding: 14px; min-width: 0; }
+
+/* ---------- 纹样绘制页(原有样式保留) ---------- */
+.grid { display: grid; gap: 2px; margin: 0 auto; width: min(100%, 720px); border: 6px solid #72533c; background: #72533c; }
+.cell { aspect-ratio: 1; background: #f8ead2; cursor: pointer; border-radius: 2px; }
+.palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.palette.small { grid-template-columns: repeat(8, 1fr); gap: 4px; margin-bottom: 6px; }
+.swatch { aspect-ratio: 1; border-radius: 8px; border: 3px solid transparent; cursor: pointer; padding: 0; }
+.swatch.active { border-color: #1f1b16; }
+.blocks { display: grid; gap: 8px; }
+.stats { display: grid; gap: 8px; }
+.stat { display: flex; justify-content: space-between; border-bottom: 1px solid #e1d5c5; padding: 6px 0; }
+.preview { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; border: 1px solid #d9cdbc; padding: 6px; margin-top: 8px; }
+.mini { aspect-ratio: 1; border-radius: 2px; }
+.toolbar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.warning { color: #a03a2e; font-weight: 800; }
+
+/* ---------- 上机织造页 ---------- */
+.loom-toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.loom-toolbar .replay { display: inline-flex; gap: 6px; margin-left: auto; align-items: center; }
+.loom-toolbar .replay select { width: auto; padding: 8px; }
+.loom-toolbar button { padding: 9px 12px; }
+
+.banner { margin-top: 10px; border-radius: 8px; padding: 10px 12px; font-weight: 700; display: none; }
+.banner.show { display: block; }
+.banner.ok { background: #e3efd8; color: #33551f; border: 1px solid #b5d09a; }
+.banner.warn { background: #fdf0d3; color: #7a5410; border: 1px solid #e8c97e; }
+.banner.err { background: #fadcd4; color: #8a2a1c; border: 1px solid #e5a08f; }
+
+.scroll-x { overflow-x: auto; }
+.scroll-both { overflow: auto; }
+.canvas-wrap { max-height: 46vh; border: 1px solid #d9cdbc; border-radius: 6px; background: #fff; -webkit-overflow-scrolling: touch; }
+.canvas-wrap canvas { display: block; }
+#warpMap { display: block; }
+
+.frame-list { display: grid; gap: 6px; }
+.frame-row { display: grid; grid-template-columns: 26px 1fr 64px 64px 30px 30px 30px; gap: 4px; align-items: center; font-size: 12px; }
+.frame-row .grip { cursor: grab; text-align: center; color: #a08e7c; font-size: 15px; user-select: none; }
+.frame-row input { padding: 5px 6px; font-size: 12px; }
+.frame-row .usedbar { height: 8px; border-radius: 4px; background: #e7dcc9; overflow: hidden; grid-column: 1 / -1; }
+.frame-row .usedbar > i { display: block; height: 100%; background: #7a9a5b; }
+.frame-row .usedbar.over > i { background: #a03a2e; }
+.frame-row .mini-btn { padding: 4px 0; font-size: 12px; border-radius: 6px; }
+.frame-row .fname { font-weight: 800; white-space: nowrap; }
+.frame-row.edge { opacity: .75; }
+
+.pick-list { display: grid; gap: 4px; max-height: 300px; overflow: auto; }
+.pick-row { display: grid; grid-template-columns: 22px 34px 1fr 52px 30px 30px 30px; gap: 4px; align-items: center; font-size: 12px; background: #fff; border: 1px solid #e1d5c5; border-radius: 6px; padding: 3px 4px; }
+.pick-row.current { outline: 3px solid #d6a437; }
+.pick-row.blocked { border-color: #a03a2e; background: #fbeee9; }
+.pick-row .grip { cursor: grab; text-align: center; color: #a08e7c; user-select: none; }
+.pick-row input, .pick-row select { padding: 4px; font-size: 12px; }
+.pick-row .mini-btn { padding: 4px 0; font-size: 12px; border-radius: 6px; }
+.pick-row .sw { width: 18px; height: 18px; border-radius: 4px; border: 1px solid #999; justify-self: center; }
+
+.reed-info { margin-top: 8px; font-size: 12px; color: #5d5245; background: #f4ecdd; border-radius: 6px; padding: 8px; }
+
+.report-block { border-top: 1px solid #e1d5c5; padding: 8px 0; font-size: 13px; }
+.report-block h4 { margin: 0 0 6px; font-size: 13px; }
+.report-block .bad { color: #a03a2e; font-weight: 800; }
+.report-block .good { color: #4a7023; font-weight: 800; }
+.report-block ul { margin: 4px 0; padding-left: 18px; }
+.report-block li { margin: 2px 0; }
+.capbar { height: 10px; border-radius: 5px; background: #e7dcc9; overflow: hidden; margin: 2px 0 6px; }
+.capbar > i { display: block; height: 100%; background: #7a9a5b; }
+.capbar.over > i { background: #a03a2e; }
+.capbar .lbl { font-size: 11px; }
+
+@media (max-width: 1100px) {
+  header { display: block; }
+  .tabs { margin-top: 10px; }
+  .tab { flex: 1; }
+  .app, .app.loom { grid-template-columns: 1fr; }
+  .canvas-wrap { max-height: 60vh; }
+  .loom-toolbar .replay { margin-left: 0; }
+}

@@ -8,3 +8,6 @@ build/
 .cache/
 .vscode/
 .idea/
+node
+.syslibs/
+recordings/
